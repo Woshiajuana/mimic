@@ -1,11 +1,18 @@
 
 // 整个打包项目的配置文件 该配置只在打包的时候参与作用 不会打包进入实际业务代码
 
-//
-const webpackConfig = {
-    directoryPath: '/src/views',
+// webpack 配置
+const directory = {
+    // 根目录遍历
+    rootDirectoryPath: '/src/views',
+    // 排除遍历的目录
+    excludeDirectory: ['components'],
+    // 遍历文件的后缀名
+    includeExtName: ['.vue'],
+    // 输出根目录
+    rootOutputPath: '/dist',
 };
 
 module.exports = {
-    webpackConfig,
+    directoryConfig,
 };
