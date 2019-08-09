@@ -1,0 +1,14 @@
+{
+  "name": "wow-weex-template",
+  "version": "1.0.0",
+  "description": "weex vue app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zhigang.chen",
+  "license": "ISC",
+  "devDependencies": {
+    "wow-cmd": "0.0.17"
+  }
+}
