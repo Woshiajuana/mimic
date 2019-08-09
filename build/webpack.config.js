@@ -4,12 +4,12 @@ const path = require('path');
 const fs = require('fs-extra');
 const output = require('wow-cmd').output;
 const cmdPath = process.cwd();
+const config = require('./config');
 
-const
 
 (function (dir) {
     dir = dir || '.';
-    const directory = path.join(cmdPath, 'src/views', dir);
+    const directory = path.join(cmdPath, config.webpackConfig.directoryPath, dir);
     console.log(directory);
     fs.readdirSync(directory).forEach((file) => {
         const fullPath = path.join(directory, file);
@@ -24,8 +24,6 @@ const
 
 })();
 
-const webpackConfig = {
+module.exports = {
 
 };
-
-module.exports = webpackConfig;

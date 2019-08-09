@@ -3,9 +3,9 @@
 
 //
 const webpackConfig = {
-
+    directoryPath: '/src/views',
 };
 
 module.exports = {
-    
+    webpackConfig,
 };
