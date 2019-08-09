@@ -30,7 +30,10 @@ switch (env) {
         let full_path = path.join(directory, file);
         let stat = fs.statSync(full_path);
         let ext_name = path.extname(full_path);
-        let dir_arr = full_path.substring(full_path.indexOf('views') + 6).replace(/\\/g, '/').split('\/');
+        let dir_arr = full_path
+            .substring(full_path.indexOf('views') + 6)
+            .replace(/\\/g, '/')
+            .split('\/');
         let last_dir = dir_arr[dir_arr.length - 1];
         if (stat.isFile() && ext_name === '.vue') {
             let file_path = path.join(dir, path.basename(file, ext_name));
