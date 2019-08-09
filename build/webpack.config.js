@@ -17,7 +17,8 @@ const rootDirectoryAbsolutePath = path.join(cmdPath, rootDirectoryPath);
         const fileDirArr = fullPath.replace(rootDirectoryAbsolutePath, '').replace(/\\/g, '/').split('\/');
         const fileLastDir = fileDirArr[fileDirArr.length - 1];
         if (fileStat.isFile() && includeExtName.indexOf(fileExtName) > -1) {
-            console.log('fileDirArr => ', fileDirArr.pop());
+            fileDirArr.pop();
+            fileDirArr.shift();
             entry[unique(fileDirArr).join('_')] = `${fullPath}?entry=true`;
         } else if (excludeDirectory.indexOf(fileLastDir) === -1) {
             walk(fullPath);

@@ -37,7 +37,9 @@ switch (env) {
         let last_dir = dir_arr[dir_arr.length - 1];
         if (stat.isFile() && ext_name === '.vue') {
             let file_path = path.join(dir, path.basename(file, ext_name));
-            let file_path_arr = file_path.replace(/\\/g, '/').split('\/');
+            let file_path_arr = file_path
+                .replace(/\\/g, '/')
+                .split('\/');
             file_path_arr = unique(file_path_arr);
             let name = file_path_arr.join('_');
             entry[name] = full_path + '?entry=true';
