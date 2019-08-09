@@ -14,6 +14,10 @@ const rootDirectoryAbsolutePath = path.join(cmdPath, rootDirectoryPath);
         const fullPath = path.join(directory, file);
         const fileStat = fs.statSync(fullPath);
         const fileExtName = path.extname(fullPath);
+        let d = fullPath;
+        // console.log('path => ', d.replace(rootDirectoryAbsolutePath, ''));
+        console.log('fileExtName => ', fileExtName);
+        console.log('path => ', path.basename(d.replace(rootDirectoryAbsolutePath, ''), '.vue'));
         const fileDirArr = fullPath.replace(rootDirectoryAbsolutePath, '').replace(/\\/g, '/').split('\/');
         const fileLastDir = fileDirArr[fileDirArr.length - 1];
         if (fileStat.isFile() && includeExtName.indexOf(fileExtName) > -1) {
