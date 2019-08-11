@@ -19,7 +19,24 @@ const applicationConfig = {
     mk: {
         // app名称
         name: '码可',
-        
+        // 版本
+        version: '',
+        // 入口文件
+        entry: '',
+        // 基础URL
+        base: '',
+        // 配置
+        config: {
+            // 本地
+            bd: {
+                // 基础URL
+                base: '',
+                // 环境
+                env: {
+
+                }
+            }
+        }
     }
 };
 
