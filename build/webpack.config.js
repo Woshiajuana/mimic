@@ -7,28 +7,27 @@ const cmdPath = process.cwd();
 const { directoryConfig } = require('./config');
 
 let entry = {};
-const { rootDirectoryPath, excludeDirectory, includeExtName, rootOutputPath } = directoryConfig;
+const {
+    rootDirectoryPath,
+    excludeDirectory,
+    includeExtName,
+    rootOutputPath,
+} = directoryConfig;
 const rootDirectoryAbsolutePath = path.join(cmdPath, rootDirectoryPath);
-(function walk(directory) {
+;(function walk(directory) {
     fs.readdirSync(directory).forEach((file) => {
         const fullPath = path.join(directory, file);
         const fileStat = fs.statSync(fullPath);
         const fileExtName = path.extname(fullPath);
-        let d = fullPath;
-        // console.log('path => ', d.replace(rootDirectoryAbsolutePath, ''));
-        console.log('fileExtName => ', fileExtName);
-        console.log('path => ', path.basename(d.replace(rootDirectoryAbsolutePath, ''), '.vue'));
-        const fileDirArr = fullPath.replace(rootDirectoryAbsolutePath, '').replace(/\\/g, '/').split('\/');
+        const fileDirArr = (path.join(directory, path.basename(fullPath, fileExtName))).replace(rootDirectoryAbsolutePath, '').replace(/\\/g, '/').split('\/');
         const fileLastDir = fileDirArr[fileDirArr.length - 1];
         if (fileStat.isFile() && includeExtName.indexOf(fileExtName) > -1) {
-            fileDirArr.pop();
             fileDirArr.shift();
             entry[unique(fileDirArr).join('_')] = `${fullPath}?entry=true`;
-        } else if (excludeDirectory.indexOf(fileLastDir) === -1) {
+        } else if (fileStat.isDirectory() && excludeDirectory.indexOf(fileLastDir) === -1) {
             walk(fullPath);
         }
     });
-
 })(rootDirectoryAbsolutePath);
 
 function unique(array){
