@@ -17,42 +17,43 @@ const directoryConfig = {
 const applicationConfig = {
     // APPID
     mk: {
+        app: 'wow',
         // app名称
         name: '码可',
         // 版本
-        version: '',
+        version: '0.0.0',
         // 入口文件
-        entry: '',
-        // 基础URL
-        base: {
-            bd: '',
-            cs: '',
-            sc: '',
-            uat: '',
-        },
-        // 环境
-        env: {
-            path: '',
-            filename: '',
-            config: {
-                bd: {
+        entry: 'mk_app',
+        // 发布
+        release: {
+            // 本地
+            bd: {
+                // app名称
+                name: '码可',
+                // 版本
+                version: '0.0.1',
+                // 入口文件
+                entry: '',
+                // 基础
+                base: '',
+                // 环境
+                env: {
+                    path: '',
+                    filename: '',
+                    config: {
 
+                    }
                 },
-                cs: {
+                // 皮肤
+                skin: {
+                    path: '',
+                    filename: '',
+                    config: {
 
-                },
-                sc: {
-
-                },
-                uat: {
-
-                },
+                    }
+                }
             }
         },
-        // 皮肤
-        skin: {
-            
-        }
     }
 };
 
