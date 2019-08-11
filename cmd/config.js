@@ -56,7 +56,7 @@ const applicationConfig = {
                     filename: '',
                     config: {
 
-                    }
+                    },
                 },
                 // 皮肤
                 skin: {
@@ -64,11 +64,11 @@ const applicationConfig = {
                     filename: '',
                     config: {
 
-                    }
-                }
-            }
+                    },
+                },
+            },
         },
-    }
+    },
 };
 
 module.exports = {
