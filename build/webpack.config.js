@@ -23,23 +23,67 @@ const rootDirectoryAbsolutePath = path.join(cmdPath, rootDirectoryPath);
         const fileLastDir = fileDirArr[fileDirArr.length - 1];
         if (fileStat.isFile() && includeExtName.indexOf(fileExtName) > -1) {
             fileDirArr.shift();
-            entry[unique(fileDirArr).join('_')] = `${fullPath}?entry=true`;
+            entry[Array.from(new Set([...fileDirArr])).join('_')] = `${fullPath}?entry=true`;
         } else if (fileStat.isDirectory() && excludeDirectory.indexOf(fileLastDir) === -1) {
             walk(fullPath);
         }
     });
 })(rootDirectoryAbsolutePath);
-
-function unique(array){
-    let n = [];
-    for(let i = 0; i < array.length; i++){
-        if (n.indexOf(array[i]) === -1 && array[i] !== 'index') n.push(array[i]);
-    }
-    return n;
-}
-
 console.log(entry);
 
 module.exports = {
-
+    entry,
+    output: {
+        path: path.join(cmdPath, rootOutputPath),
+        filename: '[name].js'
+    },
+    resolve: {
+        alias: {
+            'utils': path.resolve(__dirname, '../src/utils/'),
+            'plugins': path.resolve(__dirname, '../src/plugins/'),
+            'components': path.resolve(__dirname, '../src/components/'),
+            'api': path.resolve(__dirname, '../src/api/'),
+            'extends': path.resolve(__dirname, '../src/api/extends/'),
+            'config': path.resolve(__dirname, '../src/config/'),
+            'services': path.resolve(__dirname, '../src/services/'),
+            'appConfig': path.resolve(__dirname, '../cmd/config/'),
+            'text': path.resolve(__dirname, '../src/text/'),
+            'url': path.resolve(__dirname, '../src/url/'),
+            'mixins': path.resolve(__dirname, '../src/mixins/'),
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js(\?[^?]+)?$/,
+                loaders: ['babel-loader'],
+                include: [
+                    path.resolve(__dirname, '../node_modules/wow-weex-ui'),
+                    path.resolve(__dirname, '../node_modules/wow-weex-plugin'),
+                    path.resolve(__dirname, '../node_modules/wow-cool'),
+                    path.resolve(__dirname, '../src'),
+                ],
+                // exclude: /node_modules/,
+            },
+            {
+                test: /\.(we|vue)(\?[^?]+)?$/,
+                loader: 'weex-loader',
+            }
+        ],
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                unused: true,
+                dead_code: true,
+                warnings: false,
+                screw_ie8: true,
+            }
+        }),
+        new webpack.BannerPlugin({
+            banner: '// { "framework": "Vue" }\n',
+            raw: true,
+            exclude: [],
+        }),
+    ]
 };
