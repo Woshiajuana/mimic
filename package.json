@@ -4,7 +4,7 @@
   "description": "weex vue app",
   "main": "index.js",
   "scripts": {
-    "dev": "node cmd -d dist -iwebpack --watch --config cmd/webpack.config.js"
+    "dev": "node cmd -d dist -r bd&&webpack --watch --config cmd/webpack.config.js"
   },
   "author": "zhigang.chen",
   "license": "ISC",
