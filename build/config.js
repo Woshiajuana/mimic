@@ -24,18 +24,34 @@ const applicationConfig = {
         // 入口文件
         entry: '',
         // 基础URL
-        base: '',
-        // 配置
-        config: {
-            // 本地
-            bd: {
-                // 基础URL
-                base: '',
-                // 环境
-                env: {
+        base: {
+            bd: '',
+            cs: '',
+            sc: '',
+            uat: '',
+        },
+        // 环境
+        env: {
+            path: '',
+            filename: '',
+            config: {
+                bd: {
 
-                }
+                },
+                cs: {
+
+                },
+                sc: {
+
+                },
+                uat: {
+
+                },
             }
+        },
+        // 皮肤
+        skin: {
+            
         }
     }
 };
