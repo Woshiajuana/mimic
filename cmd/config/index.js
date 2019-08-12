@@ -69,30 +69,30 @@ const applicationConfig = {
                     },
                 },
             },
-            // tree.json 配置
-            tree: [
-                {
-                    path: path.join(cmdPath, '.'),
-                    filename: 'old_tree.json',
-                    mode: 'old',
-                },
-                {
-                    path: path.join(cmdPath, '.'),
-                    filename: 'tree.json',
-                    mode: 'new',
-                },
-                {
-                    path: path.join(cmdPath, '.'),
-                    filename: 'old_tree.json',
-                    mode: 'old',
-                },
-                {
-                    path: path.join(cmdPath, '.'),
-                    filename: 'tree.json',
-                    mode: 'new',
-                },
-            ],
         },
+        // tree.json 配置
+        tree: [
+            {
+                path: path.join(cmdPath, '.'),
+                filename: 'old_tree.json',
+                mode: 'old',
+            },
+            {
+                path: path.join(cmdPath, '.'),
+                filename: 'tree.json',
+                mode: 'new',
+            },
+            {
+                path: path.join(cmdPath, '.'),
+                filename: 'old_tree.json',
+                mode: 'old',
+            },
+            {
+                path: path.join(cmdPath, '.'),
+                filename: 'tree.json',
+                mode: 'new',
+            },
+        ],
     },
 };
 
