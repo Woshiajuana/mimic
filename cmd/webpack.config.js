@@ -5,8 +5,9 @@ const fs = require('fs-extra');
 const output = require('wow-cmd').output;
 const cmdPath = process.cwd();
 const { directoryConfig } = require('./config');
+const { name, env, app, version } = require('./cmdParams.json');
 
-output.success();
+output.info('webpack.config.js=>', `即将开始【app: ${name} 】【环境: ${env}】打包`);
 
 let entry = {};
 const {
@@ -35,7 +36,7 @@ const rootDirectoryAbsolutePath = path.join(cmdPath, rootDirectoryPath);
 module.exports = {
     entry,
     output: {
-        path: path.join(cmdPath, rootOutputPath),
+        path: path.join(cmdPath, rootOutputPath, `${app}/${env}/${version}`),
         filename: '[name].js'
     },
     resolve: {

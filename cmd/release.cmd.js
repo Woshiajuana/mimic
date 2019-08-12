@@ -141,8 +141,13 @@ const Handle = (options, data, next) => {
                 fs.writeFileSync(`${path}/${filename}`, JSON.stringify(mode === 'new' ? treeJson : oldTreeJson, null, 4));
             });
         })(tree);
+        fs.writeFileSync(path.join(cmdPath, '/cmd/cmdParams.json'), JSON.stringify({
+            app,
+            env,
+            name: treeJson.name,
+            version: treeJson.version,
+        }, null, 4));
         output.success('release.cmd=>', `配置 生成 tree.json 成功`);
-
     } catch (e) {
         output.error('release.cmd=>', `发布app错误：${e}`);
     } finally {

@@ -4,7 +4,7 @@
   "description": "weex vue app",
   "main": "index.js",
   "scripts": {
-    "dev": "node cmd -d dist -r app=mk::env=bd::version=0.0.1",
+    "dev": "node cmd -d dist -r app=mk::env=bd::version=0.0.1&&webpack --watch --config cmd/webpack.config.js",
     "del": "node cmd -d dist",
     "dev1": "node cmd -d dist -r app=mk&env=bd&version=0.0.1&&webpack --watch --config cmd/webpack.config.js"
   },
