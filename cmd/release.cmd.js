@@ -13,6 +13,7 @@ const Handle = (options, data, next) => {
     try {
         if (!params)
             throw '未指定设置发布参数';
+
         // 格式化参数
         const {
             app,
@@ -58,14 +59,14 @@ const Handle = (options, data, next) => {
                         if (typeof config !== 'string')
                             config = JSON.stringify(config);
                         fs.ensureDirSync(path);
-                        fs.writeFileSync(`${path}/${filename}`, `import env from ${JSON.stringify(config)}`);
+                        fs.writeFileSync(`${path}/${filename}`, `export default ${config}`);
                     }
                 }
             }
         })(releaseEnvs);
 
-
-
+        // 生成 tree.json
+        
     } catch (e) {
         output.error('release.cmd=>', `发布app错误：${e}`);
     } finally {
