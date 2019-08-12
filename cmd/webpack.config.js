@@ -6,6 +6,8 @@ const output = require('wow-cmd').output;
 const cmdPath = process.cwd();
 const { directoryConfig } = require('./config');
 
+output.success();
+
 let entry = {};
 const {
     rootDirectoryPath,
@@ -29,7 +31,6 @@ const rootDirectoryAbsolutePath = path.join(cmdPath, rootDirectoryPath);
         }
     });
 })(rootDirectoryAbsolutePath);
-console.log(entry);
 
 module.exports = {
     entry,
