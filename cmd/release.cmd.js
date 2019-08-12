@@ -13,14 +13,13 @@ const Handle = (options, data, next) => {
     try {
         if (!params)
             throw '未指定设置发布参数';
-
         // 格式化参数
         const {
             app,
             env,
         } = params = ((params) => {
             let objParams = {};
-            params.split('&').forEach((param) => {
+            params.split('::').forEach((param) => {
                 let [key, value] = param.split('=');
                 if (key, value)
                     objParams[key] = value;
@@ -49,14 +48,18 @@ const Handle = (options, data, next) => {
         ((releaseEnvs) => {
             for (let key in releaseEnvs) {
                 const relEnv = releaseEnvs[key];
-                if (typeof relEnv !== 'object') break;
-                const {
-                    path,
-                    filename,
-                    config,
-                } = relEnv;
-                if (path && filename && config) {
-                    fs.ensureDirSync(`${path}/${filename}`, `import env from ${config}`);
+                if (typeof relEnv === 'object') {
+                    let {
+                        path,
+                        filename,
+                        config,
+                    } = relEnv;
+                    if (path && filename && config) {
+                        if (typeof config !== 'string')
+                            config = JSON.stringify(config);
+                        fs.ensureDirSync(path);
+                        fs.writeFileSync(`${path}/${filename}`, `import env from ${JSON.stringify(config)}`);
+                    }
                 }
             }
         })(releaseEnvs);
