@@ -35,7 +35,6 @@ const Handle = (options, data, next) => {
         const {
             applicationConfig,
             directoryConfig,
-            rootDirectoryAbsolutePath,
         } = require('./config');
         const application = applicationConfig[app];
         if (!application)
@@ -76,19 +75,23 @@ const Handle = (options, data, next) => {
         const {
             includeExtName,
             excludeDirectory,
+            rootDirectoryPath,
         } = directoryConfig;
         let treeJson = {
+            version: '0.0.1',
             ...application,
             ...releaseEnvs,
             ...params,
             resource: {},
         };
         let oldTreeJson = {
+            version: '0.0.1',
             ...application,
             ...releaseEnvs,
             ...params,
             resource: {},
         };
+        const rootDirectoryAbsolutePath = path.join(cmdPath, rootDirectoryPath);
         ;(function walk(directory) {
             fs.readdirSync(directory).forEach((file) => {
                 const fullPath = path.join(directory, file);
@@ -106,7 +109,28 @@ const Handle = (options, data, next) => {
                 }
             });
         })(rootDirectoryAbsolutePath);
-        
+        tree.push({
+            filename: 'old_tree.json',
+            path: path.join(cmdPath, rootDirectoryPath, `${app}/${env}/${oldTreeJson.version}`),
+            mode: 'old',
+        });
+        tree.push({
+            filename: 'tree.json',
+            path: path.join(cmdPath, rootDirectoryPath, `${app}/${env}/${treeJson.version}`),
+            mode: 'new',
+        });
+        ;((tree) => {
+            tree.forEach((item) => {
+                let {
+                    mode,
+                    path,
+                    filename,
+                } = item;
+                fs.ensureDirSync(path);
+                fs.writeFileSync(`${path}/${filename}`, JSON.stringify(mode === 'new' ? treeJson : oldTreeJson, null, 4));
+            });
+        })(tree);
+
     } catch (e) {
         output.error('release.cmd=>', `发布app错误：${e}`);
     } finally {
