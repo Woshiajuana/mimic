@@ -37,6 +37,8 @@ const Handle = (options, data, next) => {
         const {
             applicationConfig,
             directoryConfig,
+            ip,
+            port,
         } = require('./config');
         const application = applicationConfig[app];
         if (!application)
@@ -96,8 +98,10 @@ const Handle = (options, data, next) => {
             ...params,
             resource: {},
         };
-        treeJson.base += `/${treeJson.version}`;
-        oldTreeJson.base += `/${oldTreeJson.version}`;
+        if (!treeJson.base) {
+            treeJson.base = oldTreeJson.base = `http://${ip}:${port}/${rootOutputPath}/${app}/${env}/${treeJson.version}`;
+        }
+        treeJson.base = oldTreeJson.base = treeJson.base.replace('[version]', treeJson.version);
         output.info('release.cmd=>', `配置 tree.json app名称【app: ${treeJson.name}】`);
         output.info('release.cmd=>', `配置 tree.json 版本【version: ${treeJson.version}】`);
         output.info('release.cmd=>', `配置 tree.json 入口文件【entry: ${treeJson.entry}】`);

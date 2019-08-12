@@ -3,8 +3,6 @@
 
 const cmdPath = process.cwd();
 const path = require('path');
-
-// 获取 ip
 const ip = (() => {
     let interfaces = require('os').networkInterfaces();
     for(let devName in interfaces){
@@ -17,6 +15,8 @@ const ip = (() => {
         }
     }
 })();
+
+const port = '12580';
 
 // directory 配置
 const directoryConfig = {
@@ -44,8 +44,8 @@ const applicationConfig = {
         // 发布
         release: {
             // 本地
-            bd: {
-                // 基础
+            dev: {
+                // 基础 如果不配置将会默认启用自身本地服务
                 base: '',
                 // 环境
                 env: {
@@ -53,10 +53,15 @@ const applicationConfig = {
                     filename: 'env.config.js',
                     prompt: '本地环境、资源配置',
                     config: {
-                        
+                        STATIC_URL: `http://${ip}:${port}/static/`,
+                        API_URL: 'http://www.baidu.com',
                     },
                 },
             },
+            // 测试
+
+            // 生产
+
         },
         // 生成 tree.json 配置
         tree: [
@@ -75,6 +80,8 @@ const applicationConfig = {
 };
 
 module.exports = {
+    ip,
+    port,
     directoryConfig,
     applicationConfig,
 };
