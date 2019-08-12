@@ -13,8 +13,7 @@ const Handle = (options, data, next) => {
         if (!params)
             throw '未指定设置发布参数';
         output.success('release.cmd=>', `指定发布参数【${params}】`);
-
-        // 格式化参数
+        
         const {
             app,
             env,
@@ -52,7 +51,7 @@ const Handle = (options, data, next) => {
         const releaseEnvs = release[env];
         if (!releaseEnvs)
             throw `【${app}】应用配置无【${env}】环境配置`;
-        // 读写配置
+
         ;((releaseEnvs) => {
             for (let key in releaseEnvs) {
                 const relEnv = releaseEnvs[key];
@@ -75,7 +74,6 @@ const Handle = (options, data, next) => {
             }
         })(releaseEnvs);
 
-        // 生成 tree.json
         if (!tree)
             throw '未指定发布tree';
         const {
