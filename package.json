@@ -23,7 +23,7 @@
     "fs-extra": "^8.1.0",
     "serve": "^4.0.2",
     "webpack": "^2.3.2",
-    "weex-loader": "^0.7.12",
+    "weex-loader": "^0.4.4",
     "wow-cmd": "0.0.17",
     "wow-weex-ui": "0.0.26"
   }

@@ -59,9 +59,35 @@ const applicationConfig = {
                 },
             },
             // 测试
-
+            test: {
+                // 基础 如果不配置将会默认启用自身本地服务
+                base: 'http://www.baidu.com/[version]',
+                // 环境
+                env: {
+                    path: path.join(cmdPath, '/src/config'),
+                    filename: 'env.config.js',
+                    prompt: '本地环境、资源配置',
+                    config: {
+                        STATIC_URL: `http://${ip}:${port}/static/`,
+                        API_URL: 'http://www.baidu.com',
+                    },
+                },
+            },
             // 生产
-
+            build: {
+                // 基础 如果不配置将会默认启用自身本地服务
+                base: 'http://www.baidu.com/[version]',
+                // 环境
+                env: {
+                    path: path.join(cmdPath, '/src/config'),
+                    filename: 'env.config.js',
+                    prompt: '本地环境、资源配置',
+                    config: {
+                        STATIC_URL: `http://${ip}:${port}/static/`,
+                        API_URL: 'http://www.baidu.com',
+                    },
+                },
+            },
         },
         // 生成 tree.json 配置
         tree: [
