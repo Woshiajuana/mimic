@@ -1,6 +1,8 @@
 
 // 整个打包项目的配置文件 该配置只在打包的时候参与作用 不会打包进入实际业务代码
 
+const cmdPath = process.cwd();
+const path = require('path');
 // 获取 ip
 const ip = (() => {
     let interfaces = require('os').networkInterfaces();
@@ -52,10 +54,10 @@ const applicationConfig = {
                 base: '',
                 // 环境
                 env: {
-                    path: '',
-                    filename: '',
+                    path: path.join(cmdPath, '/src/config'),
+                    filename: 'env.config.js',
                     config: {
-
+                        env: '1',
                     },
                 },
                 // 皮肤
@@ -63,7 +65,7 @@ const applicationConfig = {
                     path: '',
                     filename: '',
                     config: {
-
+                        skin: '2',
                     },
                 },
             },

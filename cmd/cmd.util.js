@@ -7,7 +7,7 @@ const cmdPath = process.cwd();
 const read = (file, mode = 'require') => {
     let cmdJson = {};
     try {
-        cmdJson = ;
+        cmdJson = {};
     } catch (e) {
         output.error(`cmd.util=>`, e);
     }

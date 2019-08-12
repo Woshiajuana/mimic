@@ -27,7 +27,6 @@ const Handle = (options, data, next) => {
             });
             return objParams;
         })(params);
-
         if (!app)
             throw '未指定发布app';
         if (!env)
@@ -42,41 +41,33 @@ const Handle = (options, data, next) => {
         const {
             release,
         } = application;
-        const releaseEnv = release[env];
-        if (!releaseEnv)
+        const releaseEnvs = release[env];
+        if (!releaseEnvs)
             throw `【${app}】应用配置无【${env}】环境配置`;
-        
+
+        // 读写配置
+        ((releaseEnvs) => {
+            for (let key in releaseEnvs) {
+                const relEnv = releaseEnvs[key];
+                if (typeof relEnv !== 'object') break;
+                const {
+                    path,
+                    filename,
+                    config,
+                } = relEnv;
+                if (path && filename && config) {
+                    fs.ensureDirSync(`${path}/${filename}`, `import env from ${config}`);
+                }
+            }
+        })(releaseEnvs);
+
+
 
     } catch (e) {
         output.error('release.cmd=>', `发布app错误：${e}`);
     } finally {
         next();
     }
-
-
-
-    // let [env, dir] = params.split(':');
-    // if (!env) {
-    //     output.warn('release.cmd=>', '未指定设置环境');
-    //     return next();
-    // }
-    // let regular = require('./config').applicationConfig;
-    // if (regular.indexOf(env) === -1) {
-    //     output.error('release.cmd=>', `环境设置错误，环境为：${env}`);
-    //     return next();
-    // }
-    // try {
-    //     output.info('release.cmd=>', `设置环境 => ${env}`);
-    //     let content_env = fs.readFileSync(path.join(cmdPath, `src/config/env.${env}.config.js`));
-    //     output.info('release.cmd=>', `${env}环境内容如下：\n${content_env}`);
-    //     content_env = `import env from './env.${env}.config';\nexport default env;`;
-    //     fs.writeFileSync(path.join(cmdPath, 'src/config/env.config.js'), content_env);
-    //     output.success('release.cmd=>', `设置环境成功 => ${env}`);
-    // } catch (e) {
-    //     output.error('release.cmd=>', `设置环境错误：${e}`);
-    // } finally {
-    //     next();
-    // }
 };
 
 // 参数 options
