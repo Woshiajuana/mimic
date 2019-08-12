@@ -99,7 +99,7 @@ export default Handle;
 function unique(array){
     let n = [];
     for(let i = 0; i < array.length; i++){
-        if (n.indexOf(array[i]) === -1 && array[i] !== 'index') n.push(array[i]);
+        if (n.indexOf(array[i]) === -1 && array[i] !== 'config.js') n.push(array[i]);
     }
     return n;
 }

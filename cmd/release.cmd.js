@@ -130,7 +130,6 @@ const Handle = (options, data, next) => {
                 fs.writeFileSync(`${path}/${filename}`, JSON.stringify(mode === 'new' ? treeJson : oldTreeJson, null, 4));
             });
         })(tree);
-
     } catch (e) {
         output.error('release.cmd=>', `发布app错误：${e}`);
     } finally {
