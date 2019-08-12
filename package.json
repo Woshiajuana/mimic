@@ -4,7 +4,7 @@
   "description": "weex vue app",
   "main": "index.js",
   "scripts": {
-    "dev": "node cmd -d dist -r app=wow::env=dev::version=0.0.1&&webpack --watch --config cmd/webpack.config.js",
+    "dev": "node cmd -d dist -r app=mk::env=dev::version=0.0.1&&webpack --watch --config cmd/webpack.config.js",
     "test": "node cmd -d dist -r app=mk::env=test::version=0.0.1&&webpack --config cmd/webpack.config.js&&npm run md5",
     "build": "node cmd -d dist -r app=mk::env=build::version=0.0.1&&webpack --config cmd/webpack.config.js&&npm run md5",
     "del": "node cmd -d dist",

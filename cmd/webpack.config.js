@@ -5,8 +5,11 @@ const fs = require('fs-extra');
 const output = require('wow-cmd').output;
 const cmdPath = process.cwd();
 const { directoryConfig } = require('./config');
-const { name, env, app, version } = require('./cmdParams.json');
+const { name, env, app, version, err } = require('./cmdParams.json');
 
+if (err) {
+    throw '无法打包，环境配置发布有误，请检查无误之后再打包';
+}
 output.info('webpack.config.js=>', `即将开始【app: ${name} 】【环境: ${env}】打包`);
 
 let entry = {};

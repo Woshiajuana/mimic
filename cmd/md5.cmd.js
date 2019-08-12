@@ -10,7 +10,7 @@ const { rootOutputPath } = directoryConfig;
 const Handle = (options, data, next) => {
     try {
         const { app, env, version } = require('./cmdParams.json');
-        const treeJson = JSON.parse(fs.readFileSync(path.join(cmdPath, 'tree.json')));
+        const treeJson = JSON.parse(fs.readFileSync(path.join(cmdPath, 'tree.json')).toString());
         const { tree } = applicationConfig[app];
         for (let key in treeJson.resource) {
             const source = treeJson.resource[key];

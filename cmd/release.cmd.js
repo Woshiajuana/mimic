@@ -154,6 +154,7 @@ const Handle = (options, data, next) => {
         output.success('release.cmd=>', `配置 生成 tree.json 成功`);
     } catch (e) {
         output.error('release.cmd=>', `发布app错误：${e}`);
+        fs.writeFileSync(path.join(cmdPath, '/cmd/cmdParams.json'), JSON.stringify({ err: true }, null, 4));
     } finally {
         next();
     }
