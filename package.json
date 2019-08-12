@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "node cmd -d dist -r app=mk::env=bd::version=0.0.1&&webpack --watch --config cmd/webpack.config.js",
+    "test": "node cmd -d dist -r app=mk::env=bd::version=0.0.1&&webpack --config cmd/webpack.config.js&&npm run md5",
+    "build": "node cmd -d dist -r app=mk::env=bd::version=0.0.1&&webpack --config cmd/webpack.config.js&&npm run md5",
     "del": "node cmd -d dist",
-    "dev1": "node cmd -d dist -r app=mk&env=bd&version=0.0.1&&webpack --watch --config cmd/webpack.config.js"
+    "md5": "node cmd -m",
+    "serve": "serve -p 12580"
   },
   "author": "zhigang.chen",
   "license": "ISC",
@@ -18,8 +21,10 @@
     "babel-register": "^6.26.0",
     "crypto": "^1.0.1",
     "fs-extra": "^8.1.0",
+    "serve": "^4.0.2",
     "webpack": "^2.3.2",
     "weex-loader": "^0.7.12",
-    "wow-cmd": "0.0.17"
+    "wow-cmd": "0.0.17",
+    "wow-weex-ui": "0.0.26"
   }
 }

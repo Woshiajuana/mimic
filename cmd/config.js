@@ -3,6 +3,7 @@
 
 const cmdPath = process.cwd();
 const path = require('path');
+
 // 获取 ip
 const ip = (() => {
     let interfaces = require('os').networkInterfaces();
@@ -72,7 +73,7 @@ const applicationConfig = {
                 },
             },
         },
-        // tree.json 配置
+        // 生成 tree.json 配置
         tree: [
             {
                 path: path.join(cmdPath, '.'),
