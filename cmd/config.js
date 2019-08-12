@@ -34,23 +34,17 @@ const directoryConfig = {
 const applicationConfig = {
     // APPID
     mk: {
-        app: 'wow',
+        app: 'mk',
         // app名称
         name: '码可',
         // 版本
-        version: '0.0.0',
+        version: '0.0.1',
         // 入口文件
         entry: 'mk_app',
         // 发布
         release: {
             // 本地
             bd: {
-                // app名称
-                name: '码可',
-                // 版本
-                version: '0.0.1',
-                // 入口文件
-                entry: '',
                 // 基础
                 base: '',
                 // 环境
@@ -59,16 +53,7 @@ const applicationConfig = {
                     filename: 'env.config.js',
                     prompt: '本地环境、资源配置',
                     config: {
-                        env: '1',
-                    },
-                },
-                // 皮肤
-                skin: {
-                    path: '',
-                    filename: '',
-                    prompt: '本地环境、资源配置',
-                    config: {
-                        skin: '2',
+                        
                     },
                 },
             },
