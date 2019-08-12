@@ -56,6 +56,7 @@ const applicationConfig = {
                 env: {
                     path: path.join(cmdPath, '/src/config'),
                     filename: 'env.config.js',
+                    prompt: '本地环境、资源配置',
                     config: {
                         env: '1',
                     },
@@ -64,6 +65,7 @@ const applicationConfig = {
                 skin: {
                     path: '',
                     filename: '',
+                    prompt: '本地环境、资源配置',
                     config: {
                         skin: '2',
                     },

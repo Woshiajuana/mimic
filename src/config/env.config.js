@@ -1,1 +1,3 @@
-export default {"env":"1"}
+export default {
+    "env": "1"
+}

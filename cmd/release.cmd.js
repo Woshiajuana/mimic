@@ -9,10 +9,10 @@ const Handle = (options, data, next) => {
         params,
     } = options;
     params = params ? params.toLocaleLowerCase() : '';
-    console.log(params);
     try {
         if (!params)
             throw '未指定设置发布参数';
+        output.success('release.cmd=>', `指定发布参数【${params}】`);
 
         // 格式化参数
         const {
@@ -29,8 +29,10 @@ const Handle = (options, data, next) => {
         })(params);
         if (!app)
             throw '未指定发布app';
+        output.success('release.cmd=>', `指定发布app【${app}】`);
         if (!env)
             throw '未指定发布env';
+        output.success('release.cmd=>', `指定发布env【${env}】`);
 
         const {
             applicationConfig,
@@ -58,12 +60,14 @@ const Handle = (options, data, next) => {
                         path,
                         filename,
                         config,
+                        prompt,
                     } = relEnv;
                     if (path && filename && config) {
                         if (typeof config !== 'string')
-                            config = JSON.stringify(config);
+                            config = JSON.stringify(config, null, 4);
                         fs.ensureDirSync(path);
                         fs.writeFileSync(`${path}/${filename}`, `export default ${config}`);
+                        output.success('release.cmd=>', `${prompt || key}配置【${config}】`);
                     }
                 }
             }
@@ -76,6 +80,7 @@ const Handle = (options, data, next) => {
             includeExtName,
             excludeDirectory,
             rootDirectoryPath,
+            rootOutputPath,
         } = directoryConfig;
         let treeJson = {
             version: '0.0.1',
@@ -91,6 +96,12 @@ const Handle = (options, data, next) => {
             ...params,
             resource: {},
         };
+        treeJson.base += `/${treeJson.version}`;
+        oldTreeJson.base += `/${oldTreeJson.version}`;
+        output.info('release.cmd=>', `配置 tree.json app名称【app: ${treeJson.name}】`);
+        output.info('release.cmd=>', `配置 tree.json 版本【version: ${treeJson.version}】`);
+        output.info('release.cmd=>', `配置 tree.json 入口文件【entry: ${treeJson.entry}】`);
+        output.info('release.cmd=>', `配置 tree.json 基础路径【base: ${treeJson.base}】`);
         const rootDirectoryAbsolutePath = path.join(cmdPath, rootDirectoryPath);
         ;(function walk(directory) {
             fs.readdirSync(directory).forEach((file) => {
@@ -101,7 +112,7 @@ const Handle = (options, data, next) => {
                 const fileLastDir = fileDirArr[fileDirArr.length - 1];
                 if (fileStat.isFile() && includeExtName.indexOf(fileExtName) > -1) {
                     fileDirArr.shift();
-                    let name = Array.from(new Set([...fileDirArr])).join('_');
+                    const name = Array.from(new Set([...fileDirArr])).join('_');
                     treeJson.resource[name] = { src: `${name}.js` };
                     oldTreeJson.resource[name] = `${name}.js`;
                 } else if (fileStat.isDirectory() && excludeDirectory.indexOf(fileLastDir) === -1) {
@@ -111,12 +122,12 @@ const Handle = (options, data, next) => {
         })(rootDirectoryAbsolutePath);
         tree.push({
             filename: 'old_tree.json',
-            path: path.join(cmdPath, rootDirectoryPath, `${app}/${env}/${oldTreeJson.version}`),
+            path: path.join(cmdPath, rootOutputPath, `${app}/${env}/${oldTreeJson.version}`),
             mode: 'old',
         });
         tree.push({
             filename: 'tree.json',
-            path: path.join(cmdPath, rootDirectoryPath, `${app}/${env}/${treeJson.version}`),
+            path: path.join(cmdPath, rootOutputPath, `${app}/${env}/${treeJson.version}`),
             mode: 'new',
         });
         ;((tree) => {
@@ -130,6 +141,8 @@ const Handle = (options, data, next) => {
                 fs.writeFileSync(`${path}/${filename}`, JSON.stringify(mode === 'new' ? treeJson : oldTreeJson, null, 4));
             });
         })(tree);
+        output.success('release.cmd=>', `配置 生成 tree.json 成功`);
+
     } catch (e) {
         output.error('release.cmd=>', `发布app错误：${e}`);
     } finally {
