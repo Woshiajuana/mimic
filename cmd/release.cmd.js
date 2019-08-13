@@ -13,7 +13,7 @@ const Handle = (options, data, next) => {
         if (!params)
             throw '未指定设置发布参数';
         output.success('release.cmd=>', `指定发布参数【${params}】`);
-        
+
         const {
             app,
             env,
@@ -97,7 +97,7 @@ const Handle = (options, data, next) => {
             resource: {},
         };
         if (!treeJson.base) {
-            treeJson.base = oldTreeJson.base = `http://${ip}:${port}/${rootOutputPath}/${app}/${env}/${treeJson.version}`;
+            treeJson.base = oldTreeJson.base = `http://${ip}:${port}${rootOutputPath}/${app}/${env}/${treeJson.version}`;
         }
         treeJson.base = oldTreeJson.base = treeJson.base.replace('[version]', treeJson.version);
         output.info('release.cmd=>', `配置 tree.json app名称【app: ${treeJson.name}】`);
