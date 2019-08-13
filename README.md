@@ -10,48 +10,35 @@
 
 ```
 project
-├── build                                   // 打包脚本目录
-|   ├── webpack.config.js                   // 打包脚本
 ├── cmd                                     // node命令目录
-|   ├── version.cmd.js
-|   ├── cmd.js
-|   ├── index.js
-|   ├── ip.cmd.js
-|   ├── release.cmd.js
-|   ├── tree.cmd.js
-├── config                                  // node命令配置文件
-|   ├── app.config.js
-|   ├── ip.config.js
-|   ├── log.config.js
-|   ├── meta.config.js
-|   ├── release.config.js
-|   ├── tree.config.js
-├── dist                                    // 打包出来的js目录
-├── node_modules                            // 依赖
+│   ├── webpack.config.js                   // webpack 配置文件
+│   ├── cmd.js
+│   ├── index.js
+│   ├── release.cmd.js                      // node 执行脚本
+│   ├── md5.cmd.js                          // node 执行脚本
+│   ├── config.js                           // 整体项目配置文件
+├── dist                                    // 产出目录 可配置
+├── node_modules                            // 依赖包
 ├── src                                     // 项目目录
-|   ├── api                                 // 接口目录
-│   ├── components                          // 组件目录
-│   ├── config                              // 项目配置目录
+│   ├── components                          // 公共组件目录
+│   ├── config                              // 项目基本配置
 │   ├── plugins                             // 插件目录
 │   ├── utils                               // 工具目录
 │   ├── services                            // 服务目录
 │   ├── views                               // 页面目录
-│   |   └── market
+│   │   └── wow
 ├── static                                  // 静态资源目录
-|   ├── images
-├── tools                                   // node命令工具目录
+│   ├── images
+│   ├── html
+│   ├── json
+├── mock                                    // mock 数据目录
 |   ├── common.tool.js
-|   ├── fs.tool.js
-|   ├── log.tool.js
-|   ├── process.tool.js
 ├── .babelrc                                // babel 配置文件
 ├── .editorconfig                           // 代码格式文件
 ├── .gitignore                              // 忽略文件
-├── old_tree.json                           // 老壳子tree
 ├── package.json
 ├── package-lock.json
 ├── README.md
-├── tree.json                               // 新壳子tree
 ```
 
 ## 操作命令
@@ -67,11 +54,8 @@ project
 > node cmd -r           [string]    =>  设置发布的环境
 > node cmd --release    [string]    =>  设置发布的环境
 
-> node cmd -t                       =>  生成tree.json
-> node cmd --tree                   =>  生成tree.json
-
-> node cmd -i           [string]    =>  设置本地环境IP
-> node cmd --ip         [string]    =>  设置本地环境IP
+> node cmd -m                       =>  生成 md5
+> node cmd --md5                    =>  生成 md5
 
 
 ### 样式命名
@@ -87,7 +71,7 @@ project
 ### 属性命名
 
 > 小写英文
-> 下划线
+> 驼峰
 > 数组加前缀 arr
 > 节点加前缀 nd
 > 对象加前缀 obj
