@@ -122,16 +122,7 @@ const Handle = (options, data, next) => {
                 }
             });
         })(rootDirectoryAbsolutePath);
-        tree.push({
-            filename: 'old_tree.json',
-            path: path.join(cmdPath, rootOutputPath, `${app}/${env}/${oldTreeJson.version}`),
-            mode: 'old',
-        });
-        tree.push({
-            filename: 'tree.json',
-            path: path.join(cmdPath, rootOutputPath, `${app}/${env}/${treeJson.version}`),
-            mode: 'new',
-        });
+
         ;((tree) => {
             tree.forEach((item) => {
                 let {
@@ -139,6 +130,7 @@ const Handle = (options, data, next) => {
                     path,
                     filename,
                 } = item;
+                path = path.replace('[app]', app).replace('[env]', env).replace('[version]', treeJson.version);
                 fs.ensureDirSync(path);
                 fs.writeFileSync(`${path}/${filename}`, JSON.stringify(mode === 'new' ? treeJson : oldTreeJson, null, 4));
             });

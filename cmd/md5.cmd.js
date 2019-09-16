@@ -21,12 +21,13 @@ const Handle = (options, data, next) => {
             output.info('md5.cmd.js=>', `文件【${filename}】的md5值为:【${source.md5}】`);
         }
         tree.forEach((item) => {
-            const {
+            let {
                 filename,
                 path,
                 mode,
             } = item;
             if (mode === 'new') {
+                path = path.replace('[app]', app).replace('[env]', env).replace('[version]', treeJson.version);
                 fs.writeFileSync(`${path}/${filename}`, JSON.stringify(treeJson, null, 4));
             }
         });

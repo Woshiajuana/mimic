@@ -92,6 +92,16 @@ const applicationConfig = {
         // 生成 tree.json 配置
         tree: [
             {
+                path: path.join(cmdPath, directoryConfig.rootOutputPath, '[app]/[env]/entry'),
+                filename: 'old_tree.json',
+                mode: 'old',
+            },
+            {
+                path: path.join(cmdPath, directoryConfig.rootOutputPath, '[app]/[env]/entry'),
+                filename: 'tree.json',
+                mode: 'new',
+            },
+            {
                 path: path.join(cmdPath, '.'),
                 filename: 'old_tree.json',
                 mode: 'old',
