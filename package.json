@@ -8,12 +8,14 @@
     "test": "node cmd -d dist -r app=mk::env=test::version=0.0.1&&webpack --config cmd/webpack.config.js&&npm run md5",
     "build": "node cmd -d dist -r app=mk::env=build::version=0.0.1&&webpack --config cmd/webpack.config.js&&npm run md5",
     "del": "node cmd -d dist",
+    "oss": "node cmd -o ",
     "md5": "node cmd -m",
     "serve": "serve -p 12580"
   },
   "author": "zhigang.chen",
   "license": "ISC",
   "devDependencies": {
+    "ali-oss": "^6.1.1",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
