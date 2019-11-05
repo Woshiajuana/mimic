@@ -33,6 +33,7 @@ const Handle = (options, data, next) => {
         output.success('accessKeySecret=>', accessKeySecret);
         output.success('bucket=>', bucket);
         output.success('config=>', config);
+
         config = ((c) => {
             let arrConfig = [];
             c.split(',').forEach((item) => {
@@ -41,15 +42,8 @@ const Handle = (options, data, next) => {
             });
             return arrConfig;
         })(config);
-        output.success('config=>', config);
-        let client = new OSS({
-            region,
-            accessKeyId,
-            accessKeySecret,
-            bucket,
-        });
 
-        let loop, index = 0, arr = [];
+        let loop, arr = [];
         (loop = (i) => {
             let objDir = config[i];
             if (!objDir) return null;
@@ -66,43 +60,33 @@ const Handle = (options, data, next) => {
                 });
             }) (path.join(cmdPath, entry), output);
             loop(++i);
-        }) (index);
-        console.log('arr =>', arr);
+        }) (0);
 
+        let client = new OSS({
+            region,
+            accessKeyId,
+            accessKeySecret,
+            bucket,
+        });
 
+        (loop = (i) => {
+            let objFile = arr[i];
+            if (!objFile) return null;
+            let { o, p } = objFile;
+            client.put(o, p).then((res) => {
+                output.success('oss.cmd=>', `文件 ${p} 上传成功`);
+                loop(++i);
+            }).catch((err) => {
+                throw err;
+            });
+        }) (0);
 
-        // (async () => {
-        //     client.put('test.txt', path.join(cmdPath, 'cmd/cmd.js')).then(() => {
-        //         console.log('成功')
-
-            // }).catch(() => {
-            //     console.log('失败')
-            // });
-            // await client.put('test.txt', 'xxx');
-            // output.success('oss.cmd=>', `上次成功`);
-        // })();
     } catch (e) {
         output.error('oss.cmd=>', `上传失败：${e}`);
     } finally {
         next();
     }
 };
-
-// let client = new OSS({
-//     region: '<Your region>',
-//     accessKeyId: '<Your AccessKeyId>',
-//     accessKeySecret: '<Your AccessKeySecret>',
-//     bucket: '<Your bucket name>',
-// });
-//
-// async function put () {
-//     try {
-//         let result = await client.put('object-name', 'local-file');
-//         console.log(result);
-//     } catch (e) {
-//         console.log(e);
-//     }
-// }
 
 // 参数 options
 Handle.options = {
