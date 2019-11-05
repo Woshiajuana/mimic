@@ -11,8 +11,8 @@ const Handle = (options, data, next) => {
             params,
         } = options;
         if (!params)
-            throw '未指定设置发布参数';
-        output.success('oss.cmd=>', `指定发布参数【${params}】`);
+            throw '未指定设置上传参数';
+        output.success('oss.cmd=>', `指定上传参数【${params}】`);
         let {
             region,
             accessKeyId,
@@ -28,11 +28,6 @@ const Handle = (options, data, next) => {
             });
             return objParams;
         })(params);
-        output.success('region=>', region);
-        output.success('accessKeyId=>', accessKeyId);
-        output.success('accessKeySecret=>', accessKeySecret);
-        output.success('bucket=>', bucket);
-        output.success('config=>', config);
 
         config = ((c) => {
             let arrConfig = [];
@@ -74,7 +69,7 @@ const Handle = (options, data, next) => {
             if (!objFile) return null;
             let { o, p } = objFile;
             client.put(o, p).then((res) => {
-                output.success('oss.cmd=>', `文件 ${p} 上传成功`);
+                output.success('oss.cmd=>', `文件 ${p} 上传到 ${o} 成功`);
                 loop(++i);
             }).catch((err) => {
                 throw err;
