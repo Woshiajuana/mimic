@@ -13,11 +13,12 @@ const Handle = (options, data, next) => {
         if (!params)
             throw '未指定设置发布参数';
         output.success('oss.cmd=>', `指定发布参数【${params}】`);
-        const {
+        let {
             region,
             accessKeyId,
             accessKeySecret,
             bucket,
+            config,
         } = params = ((params) => {
             let objParams = {};
             params.split('::').forEach((param) => {
@@ -31,12 +32,20 @@ const Handle = (options, data, next) => {
         output.success('accessKeyId=>', accessKeyId);
         output.success('accessKeySecret=>', accessKeySecret);
         output.success('bucket=>', bucket);
+        output.success('config=>', config);
+        config = JSON.parse(config);
         let client = new OSS({
             region,
             accessKeyId,
             accessKeySecret,
             bucket,
         });
+
+        config.forEach((item) => {
+            let { entry, output } = item;
+            
+        });
+
         // (async () => {
             client.put('test.txt', path.join(cmdPath, 'cmd/cmd.js')).then(() => {
                 console.log('成功')
