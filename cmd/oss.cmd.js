@@ -33,7 +33,15 @@ const Handle = (options, data, next) => {
         output.success('accessKeySecret=>', accessKeySecret);
         output.success('bucket=>', bucket);
         output.success('config=>', config);
-        config = JSON.parse(config);
+        config = ((c) => {
+            let arrConfig = [];
+            c.split(',').forEach((item) => {
+                let [ entry, output ] = item.split(':');
+                arrConfig.push({ entry, output: output || '' });
+            });
+            return arrConfig;
+        })(config);
+        output.success('config=>', config);
         let client = new OSS({
             region,
             accessKeyId,
@@ -41,18 +49,35 @@ const Handle = (options, data, next) => {
             bucket,
         });
 
-        config.forEach((item) => {
-            let { entry, output } = item;
-            
-        });
+        let loop, index = 0, arr = [];
+        (loop = (i) => {
+            let objDir = config[i];
+            if (!objDir) return null;
+            let { entry, output } = objDir, run;
+            (run = (e, o) => {
+                fs.readdirSync(e).forEach((file) => {
+                    const fullPath = path.join(e, file);
+                    const fileStat = fs.statSync(fullPath);
+                    if (fileStat.isFile()) {
+                        arr.push({ o: `${o}/${file}`, p: fullPath });
+                    } else if (fileStat.isDirectory()) {
+                        run(fullPath, `${o}/${file}`);
+                    }
+                });
+            }) (path.join(cmdPath, entry), output);
+            loop(++i);
+        }) (index);
+        console.log('arr =>', arr);
+
+
 
         // (async () => {
-            client.put('test.txt', path.join(cmdPath, 'cmd/cmd.js')).then(() => {
-                console.log('成功')
+        //     client.put('test.txt', path.join(cmdPath, 'cmd/cmd.js')).then(() => {
+        //         console.log('成功')
 
-            }).catch(() => {
-                console.log('失败')
-            });
+            // }).catch(() => {
+            //     console.log('失败')
+            // });
             // await client.put('test.txt', 'xxx');
             // output.success('oss.cmd=>', `上次成功`);
         // })();
