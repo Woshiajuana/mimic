@@ -38,7 +38,12 @@ const Handle = (options, data, next) => {
             bucket,
         });
         // (async () => {
-            client.put('test.txt', 'xxx');
+            client.put('test.txt', path.join(cmdPath, 'cmd/cmd.js')).then(() => {
+                console.log('成功')
+
+            }).catch(() => {
+                console.log('失败')
+            });
             // await client.put('test.txt', 'xxx');
             // output.success('oss.cmd=>', `上次成功`);
         // })();
