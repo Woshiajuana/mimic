@@ -8,7 +8,7 @@
     "test": "node cmd -d dist -r app=mk::env=test::version=0.0.1&&webpack --config cmd/webpack.config.js&&npm run md5",
     "build": "node cmd -d dist -r app=mk::env=build::version=0.0.1&&webpack --config cmd/webpack.config.js&&npm run md5",
     "del": "node cmd -d dist",
-    "oss": "node cmd -o region=oss-cn-shanghai::accessKeyId=LTAI4FvEhVK64GMNLnHprJfj::accessKeySecret=sTLXiroBfc0qyIs8Il69ascip2vRcj::bucket=h5-mk::config=dist/mk/dev:app,static:app/static",
+    "oss": "node cmd -o region=oss-cn-shanghai::accessKeyId=22::accessKeySecret=11::bucket=h5-mk::config=dist/mk/dev:app,static:app/static",
     "webpack": "webpack --config cmd/webpack.config.js",
     "md5": "node cmd -m",
     "serve": "serve -p 12580"
