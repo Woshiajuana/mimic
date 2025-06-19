@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# .
 
-## Getting Started
+## 依赖项
 
-First, run the development server:
+- `tailwindcss`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- `@daysnap/utils`
+
+- `motion` 动画库
+
+[官网](https://motion.dev/docs/react-quick-start)
+
+- `shadcn/ui` UI
+
+[官网](https://ui.shadcn.com/)
+[中文官网](https://www.shadcn.com.cn/)
+
+```sh
+# 初始化
+npx shadcn@latest init
+
+# 添加组件
+npx shadcn@latest add button
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `next-themes` 主题切换
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `clsx`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `next-intl` 国际化
 
-## Learn More
+[官网](https://next-intl.dev/)
 
-To learn more about Next.js, take a look at the following resources:
+- `lucide-react` ICON
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `@next/bundle-analyzer`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `copy-to-clipboard` 复制粘贴
 
-## Deploy on Vercel
+- `@bprogress/next`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[官网](https://bprogress.vercel.app/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `prettier-plugin-tailwindcss` Tailwind CSS 建议的排序顺序
+
+
+## 问题
+
+### App Router 没法监听路由点击，导致没法增加顶部进度条
+
+问题参考：
+
+- https://github.com/vercel/next.js/issues/46173
+- https://stackoverflow.com/questions/76645648/how-to-build-a-progressbar-in-nextjs-in-the-new-app-router
+
+解决：
+
+- https://www.npmjs.com/package/next-nprogress-bar
+- https://www.ewbang.com/community/article/details/999943515.html
