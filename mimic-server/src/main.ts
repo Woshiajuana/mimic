@@ -16,7 +16,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 
 import { AppModule } from './app.module';
 
-(async function bootstrap() {
+void (async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     // https://docs.nestjs.cn/9/techniques?id=%e6%97%a5%e5%bf%97
     bufferLogs: process.env.NODE_ENV === 'prod',
