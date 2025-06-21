@@ -1,0 +1,7 @@
+{
+  "/tk": "./src/views/tk/TkView.vue",
+  "/tk/paper/:id": "./src/views/tk/TkPaperView.vue",
+  "/tk/paper/:id/question-add": "./src/views/tk/TkPaperQuestionAddView.vue",
+  "/user": "./src/views/user/UserView.vue",
+  "/feedback": "./src/views/feedback/FeedbackView.vue"
+}
