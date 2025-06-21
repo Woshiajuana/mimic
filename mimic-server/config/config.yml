@@ -1,0 +1,20 @@
+# http server
+http:
+  host: localhost
+  port: 8601
+
+# 日志
+log4js:
+  dir: ./logs/mimic-server
+
+# swagger 文档
+swagger:
+  enable: true
+  path: swagger-ui
+  title: BOSS服务
+  description: Api 说明文档
+  version: 1.0
+
+# 核心服务
+core-service:
+  baseURL: http://124.223.110.198:9505

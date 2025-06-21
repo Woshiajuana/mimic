@@ -1,0 +1,27 @@
+log4js:
+  dir: /logs/mimic-server
+
+mysql:
+  type: mysql
+  host: localhost
+  port: 3306
+  username: mimic_root
+  password: mm2025
+  database: mimic
+  # 重试连接数据库间隔
+  retryDelay: 500
+  # 重试连接数据库的次数
+  retryAttempts: 1
+  autoLoadEntities: true
+  entityPrefix: mm_
+  synchronize: true
+  logging: false
+  dropSchema: false
+  timezone: Z
+
+redis:
+  url: redis://localhost:6379
+  password: ds2023
+  database: 6
+  # 一天(s) 24 * 60 * 60 * 1000
+  ttl: 86400000
